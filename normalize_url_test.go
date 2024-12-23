@@ -21,17 +21,19 @@ func TestNormalizeURL(t *testing.T) {
 	}
 
 	for i, tt := range tests {
-		res, err := normalizeURL(tt.inputURL)
-		if err != nil && !strings.Contains(err.Error(), tt.errorContains) {
-			t.Errorf("Test %d - %s, FAIL : unexpected error: %v", i, tt.name, err)
-		} else if err != nil && tt.errorContains == "" {
-			t.Errorf("Test %d - %s, FAIL : unexpected error: %v", i, tt.name, err)
-		} else if err == nil && tt.errorContains != "" {
-			t.Errorf("Test %d - %s, FAIL : expected error: %s, got nothing", i, tt.name, tt.errorContains)
-		}
+		t.Run(tt.name, func(t *testing.T) {
+			res, err := normalizeURL(tt.inputURL)
+			if err != nil && !strings.Contains(err.Error(), tt.errorContains) {
+				t.Errorf("Test %d - %s, FAIL : unexpected error: %v", i, tt.name, err)
+			} else if err != nil && tt.errorContains == "" {
+				t.Errorf("Test %d - %s, FAIL : unexpected error: %v", i, tt.name, err)
+			} else if err == nil && tt.errorContains != "" {
+				t.Errorf("Test %d - %s, FAIL : expected error: %s, got nothing", i, tt.name, tt.errorContains)
+			}
 
-		if res != tt.expected {
-			t.Errorf("Test %d - %s, FAIL : expected URL: %s, actual: %s", i, tt.name, tt.expected, res)
-		}
+			if res != tt.expected {
+				t.Errorf("Test %d - %s, FAIL : expected URL: %s, actual: %s", i, tt.name, tt.expected, res)
+			}
+		})
 	}
 }
