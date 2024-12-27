@@ -10,20 +10,23 @@ func main() {
 	fmt.Println("Web Crawler!")
 	if len(args) < 2 {
 		fmt.Println("no website provided")
-		os.Exit(1)
+		return
 	} else if len(args) > 2 {
 		fmt.Println("too many arguments provided")
-		os.Exit(1)
+		return
 	}
 
 	rawURL := args[1]
 	fmt.Println("starting crawl of: ", rawURL)
 
-	htmlBody, err := getHTML(rawURL)
+	pages, err := crawlPage(rawURL, rawURL, make(map[string]int))
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	fmt.Println(htmlBody)
+	fmt.Println()
+	for page, count := range pages {
+		fmt.Println(page, count)
+	}
 
 }
