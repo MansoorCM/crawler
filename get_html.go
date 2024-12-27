@@ -21,7 +21,7 @@ func getHTML(rawURL string) (string, error) {
 
 	contentType := res.Header.Get("Content-Type")
 	if contentType == "" || !strings.HasPrefix(contentType, "text/html") {
-		return "", fmt.Errorf("response content type is not text/html")
+		return "", fmt.Errorf("response content type %s is not text/html", contentType)
 	}
 
 	body, err := io.ReadAll(res.Body)
