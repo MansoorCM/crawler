@@ -16,26 +16,25 @@ func main() {
 		return
 	}
 
-	rawURL := args[1]
+	rawBaseURL := args[1]
 
 	maxConcurrency := getMaxConcurrency(args, 2)
 	maxPages := getMaxPages(args, 3)
 
-	fmt.Println("starting crawl of: ", rawURL)
+	fmt.Println("starting crawl of: ", rawBaseURL)
 
-	cfg, err := configure(rawURL, maxConcurrency, maxPages)
+	cfg, err := configure(rawBaseURL, maxConcurrency, maxPages)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
 	cfg.wg.Add(1)
-	go cfg.crawlPage(rawURL)
+	go cfg.crawlPage(rawBaseURL)
 	cfg.wg.Wait()
 
 	fmt.Println()
-	for page, count := range cfg.pages {
-		fmt.Println(page, count)
-	}
+
+	printReport(cfg.pages, rawBaseURL)
 
 }
