@@ -11,15 +11,19 @@ func main() {
 	if len(args) < 2 {
 		fmt.Println("no website provided")
 		return
-	} else if len(args) > 2 {
+	} else if len(args) > 4 {
 		fmt.Println("too many arguments provided")
 		return
 	}
 
 	rawURL := args[1]
+
+	maxConcurrency := getMaxConcurrency(args, 2)
+	maxPages := getMaxPages(args, 3)
+
 	fmt.Println("starting crawl of: ", rawURL)
 
-	cfg, err := configure(rawURL, 10)
+	cfg, err := configure(rawURL, maxConcurrency, maxPages)
 	if err != nil {
 		fmt.Println(err)
 		return

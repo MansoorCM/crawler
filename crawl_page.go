@@ -13,6 +13,11 @@ func (cfg config) crawlPage(rawCurrURL string) {
 		cfg.wg.Done()
 	}()
 
+	maxPagesVisited := cfg.alreadyVisitedMaxPages()
+	if maxPagesVisited {
+		return
+	}
+
 	currURL, err := url.Parse(rawCurrURL)
 	if err != nil {
 		fmt.Printf("error parsing rawCurrURL, %v\n", err)
