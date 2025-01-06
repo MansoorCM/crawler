@@ -10,10 +10,18 @@ The app implements concurrency using goroutines, significantly enhancing perform
 
 Clone the repo and run the following command.
 
-**go build -o out && ./out 'url' 'max_goroutines' 'max_pages'**
+    go build -o out && ./out 'url' 'max_goroutines' 'max_pages'
 
-for eg. **go build -o out && ./out `https://www.chess.com/` 6 250**
+for eg.
+
+    go build -o out && ./out https://www.chess.com/ 6 250
 
 the parameters 'max_goroutines' and 'max_pages' are optional and if not provided they will default to 5 and 100 respectively. 
 
 ![](https://github.com/MansoorCM/crawler/blob/main/crawler_demo.gif)
+
+### Tests
+
+use the following command in the root folder to run all tests in the project.
+    
+    go test ./...
