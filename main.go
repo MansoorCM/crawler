@@ -33,8 +33,6 @@ func main() {
 	go cfg.crawlPage(rawBaseURL)
 	cfg.wg.Wait()
 
-	fmt.Println()
-
 	printReport(cfg.pages, rawBaseURL)
 
 }

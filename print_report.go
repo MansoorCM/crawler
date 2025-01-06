@@ -33,6 +33,7 @@ func sortPagesDescendingCount(pages_slice []Page) {
 }
 
 func printReportHelper(pages_slice []Page, baseURL string) {
+	fmt.Println()
 	fmt.Println("=============================")
 	fmt.Println("  REPORT for ", baseURL)
 	fmt.Println("=============================")
