@@ -3,9 +3,12 @@ package main
 import (
 	"fmt"
 	"os"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	godotenv.Load()
 	args := os.Args
 	fmt.Println("Web Crawler!")
 	if len(args) < 2 {
@@ -35,4 +38,11 @@ func main() {
 
 	printReport(cfg.pages, rawBaseURL)
 
+	apiKey := os.Getenv("PERPLEXITY_KEY")
+	if apiKey == "" {
+		fmt.Println("invalid api key for LLM")
+		return
+	}
+	hosts := []string{"www.chess.com", "www.google.com", "www.openai.com", "www.perplexity.ai", "news.ycombinator.com"}
+	printReportFromLLM(apiKey, hosts)
 }
