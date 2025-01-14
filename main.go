@@ -41,7 +41,7 @@ func main() {
 
 	printReport(pagesSlice, rawBaseURL)
 
-	apiKey := os.Getenv("PERPLEXITY_KEY")
+	apiKey := os.Getenv("GEMINI_KEY")
 	if apiKey == "" {
 		fmt.Println("invalid api key for LLM")
 		return
