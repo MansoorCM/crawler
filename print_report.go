@@ -5,14 +5,6 @@ import (
 	"sort"
 )
 
-func printReport(pages map[string]int, baseURL string) {
-
-	pages_slice := getPagesSliceFromMap(pages)
-	sortPagesDescendingCount(pages_slice)
-	printReportHelper(pages_slice, baseURL)
-
-}
-
 func getPagesSliceFromMap(pages map[string]int) []Page {
 	pages_slice := make([]Page, len(pages))
 
@@ -32,7 +24,7 @@ func sortPagesDescendingCount(pages_slice []Page) {
 	})
 }
 
-func printReportHelper(pages_slice []Page, baseURL string) {
+func printReport(pages_slice []Page, baseURL string) {
 	fmt.Println()
 	fmt.Println("=============================")
 	fmt.Println("  REPORT for ", baseURL)

@@ -36,13 +36,21 @@ func main() {
 	go cfg.crawlPage(rawBaseURL)
 	cfg.wg.Wait()
 
-	printReport(cfg.pages, rawBaseURL)
+	pagesSlice := getPagesSliceFromMap(cfg.pages)
+	sortPagesDescendingCount(pagesSlice)
+
+	printReport(pagesSlice, rawBaseURL)
 
 	apiKey := os.Getenv("PERPLEXITY_KEY")
 	if apiKey == "" {
 		fmt.Println("invalid api key for LLM")
 		return
 	}
-	hosts := []string{"www.chess.com", "www.google.com", "www.openai.com", "www.perplexity.ai", "news.ycombinator.com"}
+
+	hosts := make([]string, 10)
+	for i := 0; i < min(10, len(pagesSlice)); i++ {
+		hosts = append(hosts, pagesSlice[i].Link)
+	}
+
 	printReportFromLLM(apiKey, hosts)
 }

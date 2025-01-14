@@ -25,11 +25,11 @@ func printReportFromLLM(apiKey string, hosts []string) {
 }
 
 func getPrompt(hosts []string) string {
-	promptStart := `hi, I am making this request from my web crawler app. I will 
-	provide the hostnames of the top websites I found while crawling. can you provide 
-	a report with a short description of each host (at most 10 lines for each). only 
-	provide the report with the form ' idx num - hostname \n description text ' and 
-	nothing else. The hostnames are the following `
+	promptStart := `Hi, I am making this request from my web crawler app. I will 
+	provide the top URLs I found while crawling. Can you generate 
+	a report with a short description of each URL (at most 10 lines for each and 
+	preferably at least 3 lines)? Only provide the report with the 
+	form ' idx num - URL \n description text ' and nothing else. The URLs are the following. `
 
 	return promptStart + strings.Join(hosts, ",")
 }
