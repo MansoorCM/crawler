@@ -8,6 +8,13 @@ The app implements concurrency using goroutines, significantly enhancing perform
 
 ## Quick Start
 
+Generate Google Gemini API Key from https://aistudio.google.com/app/apikey
+
+Create a ".env" file in your directory and add GEMINI_KEY="api_key“
+
+Note - The LLM only generates the final report of the crawling results. 
+Thus, everything else will work fine even if there is no valid API Key.
+
 Clone the repo and run the following command.
 
     go build -o out && ./out 'url' 'max_goroutines' 'max_pages'
@@ -25,6 +32,11 @@ The parameters 'max_goroutines' and 'max_pages' are optional and if not provided
 Use the following command in the root folder to run all tests in the project.
     
     go test ./...
+
+#### Perplexity
+
+To use Perplexity AI, generate an API Key from https://www.perplexity.ai/settings/api
+and add PERPLEXITY_KEY="api_key" to the .env file. Also, use the git branch feature/perplexity-integration.
 
 ## Design
 
@@ -86,5 +98,5 @@ and potential infinite loops are avoided.
 
 #### Report
 
-The app finally prints a report of all the web pages crawled and the number of times each page was seen. The pages are 
-considered in descending order of their count, prioritizing the more relevant pages. 
+The app uses Google Gemini API to generate a report about the top web pages crawled and a description of each web page.
+This helps us know more about the types of sites that are linked to our initial starting URL. To generate a report using Perplexity AI, use the git branch feature/perplexity-integration.
